@@ -1,4 +1,4 @@
-module VoterRegistrationExample exposing (Model, Msg(..), init, update, view)
+module TicTacToe exposing (Model, Msg(..), init, update, view)
 
 import Browser
 import Dict exposing (Dict)

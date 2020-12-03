@@ -1,10 +1,10 @@
-module VoterRegistrationExampleTest exposing (all)
+module TicTacToeTest exposing (all)
 
 import ProgramTest exposing (ProgramTest, check, clickButton, expectView, expectViewHas, fillIn, update)
 import Test exposing (..)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (id, tag, text)
-import VoterRegistrationExample as Main
+import TicTacToe as Main
 
 
 start : ProgramTest Main.Model Main.Msg (Cmd Main.Msg)
