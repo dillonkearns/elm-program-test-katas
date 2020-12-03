@@ -1,8 +1,9 @@
 module VoterRegistrationExampleTest exposing (all)
 
-import ProgramTest exposing (ProgramTest, clickButton, expectViewHas, fillIn, update)
+import ProgramTest exposing (ProgramTest, check, clickButton, expectView, expectViewHas, fillIn, update)
 import Test exposing (..)
-import Test.Html.Selector exposing (text)
+import Test.Html.Query as Query
+import Test.Html.Selector as Selector exposing (id, tag, text)
 import VoterRegistrationExample as Main
 
 
@@ -18,27 +19,17 @@ start =
 
 all : Test
 all =
-    describe "voter registration frontend"
-        [ test "happy path: successful registration" <|
+    describe "tic tac toe"
+        [ test "check a single box" <|
             \() ->
                 start
-                    |> fillIn "name" "Name" "Bailey Sheppard"
-                    |> fillIn "street-address" "Street Address" "14 North Moore Street"
-                    |> fillIn "postcode" "Postal Code" "60606"
-                    |> clickButton "Register"
-                    |> update (Main.RegistrationResponse (Ok "Aug 12"))
-                    |> expectViewHas
-                        [ text "Success!"
-                        , text "Next election date is: Aug 12"
-                        ]
-        , test "invalid postal code shows a validation error" <|
-            \() ->
-                start
-                    |> fillIn "name" "Name" "Bailey Sheppard"
-                    |> fillIn "street-address" "Street Address" "14 North Moore Street"
-                    |> fillIn "postcode" "Postal Code" "0000"
-                    |> clickButton "Register"
-                    |> expectViewHas
-                        [ text "You must enter a valid postal code"
-                        ]
+                    |> ProgramTest.within
+                        (Query.find [ id "1-1" ])
+                        (ProgramTest.clickButton "")
+                    |> expectView
+                        (\view ->
+                            view
+                                |> Query.find [ id "1-1" ]
+                                |> Query.has [ text "X" ]
+                        )
         ]
